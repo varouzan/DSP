@@ -1,0 +1,34 @@
+function x7 = srconvert(x)
+%{
+h1 = firceqrip(50,1/4,[0.0001 0.000031]);% fvtool(d);
+h2 = firceqrip(50,1/8,[0.0001 0.000031]);
+h3= firceqrip(50,1/10,[0.0001 0.000031]); 
+h4= firceqrip(50,1/21,[0.0001 0.000031]); 
+a=1;
+
+x1=upsample(x,4);
+x2=filter(h1,a,x1);
+x3=upsample(x2,8);
+x4=filter(h2,a,x3);
+x5=upsample(x4,10);
+x6=filter(h3,a,x5);
+x7=downsample(x6,7);
+x8=filter(h4,a,x7);
+x9=downsample(x8,21);
+
+soundsc(x9,24000);
+%}
+h1 = firceqrip(30,1/32,[0.00001 0.00000000031]);fvtool(h1);
+h2= firceqrip(30,1/10,[0.00001 0.00000000031]); 
+h3= firceqrip(30,1/21,[0.00001 0.00000000031]); 
+a=1;
+
+x1=upsample(x,32);
+x2=filter(h1,a,x1);
+x3=upsample(x2,10);
+x4=filter(h2,a,x3);
+x5=downsample(x4,7);
+x6=filter(h3,a,x5);
+x7=downsample(x6,21);
+end
+
